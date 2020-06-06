@@ -1,63 +1,42 @@
-### Objective
+# Muse REST API
 
-Your assignment is to build an internal API for a fake financial institution using Node and no framework.
+## Before using
 
-### Brief
+- Please make sure that you have:
+ - node.js installed (https://nodejs.org/)
+ - have mongodb installed and running locally (https://www.mongodb.com/)
+   - Using Windows, just open the terminal at where you installed mongo and run `mongod.exe`
+ - run npm install in your root project folder
+## Usage
 
-While modern banks have evolved to serve a plethora of functions, at their core, banks must provide certain basic features. Today, your task is to build the basic HTTP API for one of those banks! Imagine you are designing a backend API for bank employees. It could ultimately be consumed by multiple frontends (web, iOS, Android etc).
+To run the project, please use a command line the following:
+ - npm start
+    - It will run the server at port 3600.
 
-### Tasks
+    after started you can make unauthorized requests to create a user at POST localhost:3600/users
+    {
+    "firstName" : "Petko",
+    "lastName" : "Gotsov",
+    "email" : "petkogotsov.muse.com",
+    "password" : "somePass"
+    }
+    after user is created store the userId from response and use the POST localhost:3600/auth
+    {
+    "email" : "petkogotsov.muse.com",
+    "password" : "somePass"
+    } to get a token
+    after receiving token, set the Authorization Bearer {token} for all subsequent requests
+    and create x2 bank accounts at POST localhost:3600/accounts
+    {
+	"balance" : 45000,
+	"userId" : {userId created in step 1}
+    }
+    use POST localhost:3600/accounts/{accountIdToTransferFrom}/transfer
+    {
+	"receiverId": {accountIdToTransferTo},
+	"sum": 15000
+    }
+    check out all accounts at GET localhost:3600/accounts
+    account balance at GET localhost:3600/accounts/getBalance/{accountId}
+    transaction history at GET localhost:3600/accounts/getTransactionHistory/{accountId}     
 
-- Implement assignment using:
-  - Language: **Node**
-  - Framework: **no framework**
-- There should be API routes that allow them to:
-  - Create a new bank account for a customer, with an initial deposit amount. A
-    single customer may have multiple bank accounts.
-  - Transfer amounts between any two accounts, including those owned by
-    different customers.
-  - Retrieve balances for a given account.
-  - Retrieve transfer history for a given account.
-- Write tests for your business logic
-
-Feel free to pre-populate your customers with the following:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Arisha Barron"
-  },
-  {
-    "id": 2,
-    "name": "Branden Gibson"
-  },
-  {
-    "id": 3,
-    "name": "Rhonda Church"
-  },
-  {
-    "id": 4,
-    "name": "Georgina Hazel"
-  }
-]
-```
-
-You are expected to design any other required models and routes for your API.
-
-### Evaluation Criteria
-
-- **Node** best practices
-- Completeness: did you complete the features?
-- Correctness: does the functionality act in sensible, thought-out ways?
-- Maintainability: is it written in a clean, maintainable way?
-- Testing: is the system adequately tested?
-- Documentation: is the API well-documented?
-
-### CodeSubmit
-
-Please organize, design, test and document your code as if it were going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
-
-All the best and happy coding,
-
-The Muse Team
