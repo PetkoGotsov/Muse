@@ -1,2 +1,0 @@
-C:\Users\Petko.Gotsov\source\repos\rest-api\obj\Debug\muse-rest-api.njsproj.CoreCompileInputs.cache
-C:\Users\Petko.Gotsov\source\repos\rest-api\bin\Microsoft.NodejsTools.WebRole.dll
